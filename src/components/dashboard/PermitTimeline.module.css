@@ -1,0 +1,100 @@
+.timelineContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.emptyMessage {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  padding: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-left: 6px solid transparent;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.daysBadge {
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.date {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.permitTitle {
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.unitName {
+  font-size: 0.875rem;
+  color: #777;
+  margin: 0;
+}
+
+/* Color themes */
+.critical {
+  border-left-color: #f44336;
+}
+
+.critical .daysBadge {
+  background-color: #f44336;
+}
+
+.warning {
+  border-left-color: #ff9800;
+}
+
+.warning .daysBadge {
+  background-color: #ff9800;
+}
+
+.normal {
+  border-left-color: #4caf50;
+}
+
+.normal .daysBadge {
+  background-color: #4caf50;
+}
+
+.expired {
+  border-left-color: #9e9e9e;
+}
+
+.expired .daysBadge {
+  background-color: #9e9e9e;
+}

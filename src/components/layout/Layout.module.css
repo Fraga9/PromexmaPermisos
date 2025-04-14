@@ -1,0 +1,19 @@
+/* src/components/layout/Layout.module.css */
+.layoutContainer {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6; /* Un fondo ligeramente gris */
+    overflow-x: hidden; /* Evitar overflow horizontal */
+}
+
+.mainContent {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pageContent {
+    padding: 15px; /* Reducido para evitar desbordes */
+    flex-grow: 1;
+    overflow-y: auto; /* Para scroll si el contenido es largo */
+}

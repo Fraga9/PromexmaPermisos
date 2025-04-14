@@ -1,0 +1,9 @@
+/* src/components/common/ErrorMessage.module.css */
+.error {
+    background-color: #fdecea; /* Rojo muy claro */
+    color: #d9534f; /* Rojo oscuro */
+    border: 1px solid #d9534f;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
