@@ -1,0 +1,309 @@
+/* PermitRow.module.css - Estilos mejorados */
+
+.tableRow {
+    display: table-row;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.tableRow:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tableRow td {
+    padding: 12px 16px;
+    vertical-align: middle;
+    font-size: 0.95rem;
+    color: #495057;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+.tableRow td:first-child {
+    font-weight: 500;
+    color: #343a40;
+}
+
+/* Contenedor de entrada de fecha */
+.dateInputContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.dateInput {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+    width: 140px;
+}
+
+.dateInput:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.dateInput:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+/* Iconos y botones */
+.iconButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #6c757d;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.iconButton:hover {
+    color: #007bff;
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.iconButton:disabled {
+    color: #adb5bd;
+    cursor: not-allowed;
+    background-color: transparent;
+}
+
+/* Estilos para insignias de estado */
+.statusBadge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.2s ease;
+    min-width: 90px;
+}
+
+.statusVigente {
+    background-color: rgba(25, 135, 84, 0.15);
+    color: #198754;
+}
+
+.statusPorVencer {
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #fd7e14;
+}
+
+.statusVencido {
+    background-color: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+}
+
+.statusUnknown {
+    background-color: rgba(108, 117, 125, 0.15);
+    color: #6c757d;
+}
+
+/* Estilos para sección de comentarios */
+.commentEditContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 200px;
+}
+
+.commentTextarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    resize: vertical;
+    min-height: 60px;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+}
+
+.commentTextarea:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.commentTextarea:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.commentActions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.saveIcon {
+    color: #198754;
+}
+
+.saveIcon:hover {
+    color: #157347;
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.cancelIcon {
+    color: #dc3545;
+}
+
+.cancelIcon:hover {
+    color: #bb2d3b;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.commentDisplay {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    position: relative;
+    min-height: 24px;
+}
+
+.commentText {
+    font-size: 0.95rem;
+    color: #495057;
+    line-height: 1.5;
+    flex: 1;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.editCommentButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #6c757d;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+    opacity: 0.6;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.editCommentButton:hover {
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
+    opacity: 1;
+}
+
+.deleteIcon {
+    color: #dc3545;
+}
+
+.deleteIcon:hover {
+    color: #bb2d3b;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Media Queries para diseño responsivo */
+@media (max-width: 992px) {
+    .tableRow td {
+        padding: 10px 12px;
+    }
+    
+    .dateInput {
+        width: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tableRow td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+        max-width: 150px;
+    }
+    
+    .dateInputContainer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .dateInput {
+        width: 100%;
+    }
+    
+    .commentEditContainer {
+        gap: 0.5rem;
+    }
+    
+    .commentActions {
+        justify-content: flex-start;
+    }
+    
+    .statusBadge {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tableRow {
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        margin-bottom: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    
+    .tableRow td {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 8px 0;
+        max-width: none;
+    }
+    
+    .tableRow td:last-child {
+        border-bottom: none;
+    }
+    
+    .tableRow td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #343a40;
+        margin-right: 12px;
+        flex: 1;
+    }
+    
+    .commentDisplay {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        flex: 2;
+    }
+    
+    .commentText {
+        width: 100%;
+    }
+    
+    .editCommentButton {
+        margin-left: 0;
+    }
+}
