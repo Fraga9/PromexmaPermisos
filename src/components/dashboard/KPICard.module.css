@@ -1,90 +1,97 @@
 /* src/components/dashboard/KPICard.module.css */
 .card {
-    flex: 1;
-    min-width: 180px;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-left: 5px solid;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #fff; /* Fondo blanco por defecto */
-    transition: transform 0.2s ease-in-out;
-    align-items: center;
-    gap: 1rem;
-  }
-  .card:hover {
-      transform: translateY(-3px);
-  }
-  
-  .title {
-    font-size: 1rem;
-    color: #6c757d; /* Gris */
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  .value {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #343a40; /* Negro suave */
-    text-align: right;
-    line-height: 1.1;
-  }
-  
-  .loadingContainer {
-    display: flex;
-    justify-content: flex-end; /* Alinea spinner a la derecha como el valor */
-    align-items: center;
-    min-height: 42px; /* Altura aprox del valor */
-  }
-  
-  .iconContainer {
-    /* Estilos si usas íconos */
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    opacity: 0.3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #f4f4f4;
-  }
+  flex: 1;
+  min-width: 180px;
+  padding: 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  border-left: 5px solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #fff; /* Fondo blanco por defecto */
+  transition: all 0.2s ease-in-out;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  cursor: help; /* Indica que hay tooltip */
+}
 
-  .icon {
-    width: 24px;
-    height: 24px;
-  }
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
 
-  .content {
-    flex: 1;
-  }
-  
-  /* Colores basados en status */
-  .info { border-left-color: #5bc0de; }
-  .info .value { color: #5bc0de; }
-  
-  .success { 
-    border-left-color: #5cb85c; 
-    background-color: #e8f5e9;
-    color: #4caf50;
-  }
-  .success .value { color: #5cb85c; }
-  
-  .warning { 
-    border-left-color: #f0ad4e; 
-    background-color: #fff8e1;
-    color: #ff9800;
-  }
-  .warning .value { color: #f0ad4e; }
-  
-  .danger { 
-    border-left-color: #d9534f; 
-    background-color: #ffebee;
-    color: #f44336;
-  }
-  .danger .value { color: #d9534f; }
+.title {
+  font-size: 0.9rem;
+  color: #6c757d; /* Gris */
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.valueContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.secondaryValue {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  font-weight: 600;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.05);
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+}
+
+.content {
+  flex: 1;
+}
+
+/* Colores basados en status */
+.info { 
+  border-left-color: #5bc0de; 
+  background-color: rgba(91, 192, 222, 0.05);
+}
+.info .value, .info .secondaryValue { color: #5bc0de; }
+.info .iconContainer { color: #5bc0de; }
+
+.success { 
+  border-left-color: #5cb85c; 
+  background-color: rgba(92, 184, 92, 0.05);
+}
+.success .value, .success .secondaryValue { color: #5cb85c; }
+.success .iconContainer { color: #5cb85c; }
+
+.warning { 
+  border-left-color: #f0ad4e; 
+  background-color: rgba(240, 173, 78, 0.05);
+}
+.warning .value, .warning .secondaryValue { color: #f0ad4e; }
+.warning .iconContainer { color: #f0ad4e; }
+
+.danger { 
+  border-left-color: #d9534f; 
+  background-color: rgba(217, 83, 79, 0.05);
+}
+.danger .value, .danger .secondaryValue { color: #d9534f; }
+.danger .iconContainer { color: #d9534f; }
