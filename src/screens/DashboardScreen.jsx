@@ -6,7 +6,6 @@ import StatusBarChart from '../components/dashboard/StatusBarChart';
 import ComplianceHeatMap from '../components/dashboard/ComplianceHeatMap';
 import UnitRanking from '../components/dashboard/UnitRanking';
 import PermitTimeline from '../components/dashboard/PermitTimeline';
-import DetailedTable from '../components/dashboard/DetailedTable';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import ErrorMessage from '../components/common/ErrorMessage';
 import styles from './DashboardScreen.module.css';
@@ -23,6 +22,7 @@ function DashboardScreen() {
       try {
         // Llamada a función RPC en Supabase para obtener todos los datos del dashboard
         const { data, error: rpcError } = await supabase.rpc('get_dashboard_data');
+        console.log('RPC Response:', data, rpcError); // Log de la respuesta de la RPC
 
         if (rpcError) throw rpcError;
         setDashboardData(data || {});
@@ -75,12 +75,6 @@ function DashboardScreen() {
       <section className={styles.section}>
         <h2>Timeline de Permisos Críticos</h2>
         <PermitTimeline data={dashboardData?.permitTimeline} />
-      </section>
-
-      {/* Sección 6: Tabla detallada con filtros */}
-      <section className={styles.section}>
-        <h2>Tabla Detallada de Permisos</h2>
-        <DetailedTable data={dashboardData?.detailedPermits} />
       </section>
     </div>
   );

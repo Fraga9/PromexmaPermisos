@@ -6,3 +6,5 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 // Crea y exporta el cliente Supabase
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+console.log('Supabase client created with URL:', supabaseUrl)
+console.log('Supabase client created with ANON KEY:', supabaseAnonKey)

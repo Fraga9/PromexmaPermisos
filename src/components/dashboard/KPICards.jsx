@@ -5,37 +5,41 @@ import styles from './KPICards.module.css';
 
 function KPICards({ data }) {
   if (!data) return <div>No hay datos disponibles</div>;
+  
+
+  // Calculamos el porcentaje de unidades en cumplimiento
+  const percentCompliant = Math.round((data.compliantUnits / data.totalUnits) * 100) || 0;
 
   return (
     <div className={styles.kpiContainer}>
       <KPICard
-        title="% Permisos Vigentes"
-        value={`${data.percentValidPermits}%`}
-        status={data.percentValidPermits > 80 ? 'success' : data.percentValidPermits > 60 ? 'warning' : 'danger'}
+        title="% Unidades en Cumplimiento"
+        value={`${percentCompliant}%`}
+        status={percentCompliant > 80 ? 'success' : percentCompliant > 60 ? 'warning' : 'danger'}
         icon="valid"
       />
       <KPICard
-        title="Permisos Vencidos"
-        value={data.expiredPermits}
-        status={data.expiredPermits === 0 ? 'success' : data.expiredPermits < 5 ? 'warning' : 'danger'}
+        title="Unidades no en Reglamento"
+        value={data.nonCompliantUnits}
+        status={data.nonCompliantUnits === 0 ? 'success' : data.nonCompliantUnits < 5 ? 'warning' : 'danger'}
         icon="expired"
       />
       <KPICard
-        title="Permisos por Vencer (30 días)"
-        value={data.expiringPermits}
-        status={data.expiringPermits === 0 ? 'success' : data.expiringPermits < 10 ? 'warning' : 'danger'}
+        title="Unidades en Advertencia"
+        value={data.warningUnits}
+        status={data.warningUnits === 0 ? 'success' : data.warningUnits < 10 ? 'warning' : 'danger'}
         icon="expiring"
       />
       <KPICard
-        title="Puntaje Promedio"
-        value={`${data.averageScore}/100`}
-        status={data.averageScore > 80 ? 'success' : data.averageScore > 60 ? 'warning' : 'danger'}
+        title="Total de Unidades"
+        value={data.totalUnits}
+        status={'info'}
         icon="score"
       />
       <KPICard
-        title="Unidades en Estado Crítico"
-        value={data.criticalUnits}
-        status={data.criticalUnits === 0 ? 'success' : data.criticalUnits < 3 ? 'warning' : 'danger'}
+        title="Unidades Conformes"
+        value={data.compliantUnits}
+        status={data.compliantUnits > (data.totalUnits * 0.8) ? 'success' : data.compliantUnits > (data.totalUnits * 0.6) ? 'warning' : 'danger'}
         icon="critical"
       />
     </div>

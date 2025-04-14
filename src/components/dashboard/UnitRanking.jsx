@@ -6,9 +6,22 @@ function UnitRanking({ data }) {
   if (!data || data.length === 0) {
     return <div>No hay datos disponibles para el ranking</div>;
   }
+  
+
+  // Calcular puntuación basada en permisos vigentes vs total
+  const processedData = data.map(unit => {
+    const compliancePercentage = unit.total_permisos > 0 
+      ? Math.round((unit.vigentes / unit.total_permisos) * 100) 
+      : 0;
+    
+    return {
+      ...unit,
+      score: compliancePercentage
+    };
+  });
 
   // Ordenar unidades de mayor a menor puntaje
-  const sortedUnits = [...data].sort((a, b) => b.score - a.score);
+  const sortedUnits = [...processedData].sort((a, b) => b.score - a.score);
 
   return (
     <div className={styles.rankingContainer}>
@@ -17,10 +30,10 @@ function UnitRanking({ data }) {
           <li key={unit.id} className={styles.rankingItem}>
             <div className={styles.rankNumber}>{index + 1}</div>
             <div className={styles.rankContent}>
-              <div className={styles.unitName}>{unit.name}</div>
+              <div className={styles.unitName}>{unit.nombre}</div>
               <div className={styles.unitInfo}>
                 <span className={styles.region}>{unit.region}</span>
-                <span className={styles.compliantCount}>{unit.compliantPermits} permisos cumplidos</span>
+                <span className={styles.compliantCount}>{unit.vigentes} de {unit.total_permisos} permisos vigentes</span>
               </div>
             </div>
             <div className={`${styles.score} ${getScoreClass(unit.score)}`}>

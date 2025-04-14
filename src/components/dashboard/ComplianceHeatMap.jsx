@@ -1,25 +1,16 @@
-// src/components/dashboard/ComplianceHeatMap.jsx
 import React from 'react';
 import styles from './ComplianceHeatMap.module.css';
 
 function ComplianceHeatMap({ data }) {
-  if (!data || !data.units || !data.permits) {
-    return <div>No hay datos disponibles para la matriz de cumplimiento</div>;
+  console.log('ComplianceHeatMap Props:', data);
+  
+  if (!data || data.length === 0) {
+    return (
+      <div className={styles.heatmapContainer}>
+        <div className={styles.noData}>No hay datos disponibles para la matriz de cumplimiento</div>
+      </div>
+    );
   }
-
-  // Función para determinar el color según el estatus
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'Cumplido':
-        return styles.compliant;
-      case 'Vencido':
-        return styles.expired;
-      case 'Por vencer':
-        return styles.expiring;
-      default:
-        return styles.notApplicable;
-    }
-  };
 
   return (
     <div className={styles.heatmapContainer}>
@@ -27,34 +18,35 @@ function ComplianceHeatMap({ data }) {
         <table className={styles.heatmap}>
           <thead>
             <tr>
-              <th>Unidad Operativa</th>
-              {data.permits.map(permit => (
-                <th key={permit.id} className={styles.rotated}>
-                  <div>{permit.name}</div>
-                </th>
-              ))}
+              <th>Tipo de Permiso</th>
+              <th>Cumplidos</th>
+              <th>Por Vencer</th>
+              <th>Vencidos</th>
+              <th>Total</th>
+              <th>Estado General</th>
             </tr>
           </thead>
           <tbody>
-            {data.units.map(unit => (
-              <tr key={unit.id}>
-                <td className={styles.unitName}>{unit.name}</td>
-                {data.permits.map(permit => {
-                  const cell = data.matrix.find(
-                    item => item.unitId === unit.id && item.permitId === permit.id
-                  );
-                  return (
-                    <td 
-                      key={`${unit.id}-${permit.id}`} 
-                      className={`${styles.cell} ${cell ? getStatusColor(cell.status) : styles.notApplicable}`}
-                      title={cell ? `${unit.name} - ${permit.name}: ${cell.status}` : 'No aplicable'}
-                    >
-                      {cell ? cell.statusShort : 'N/A'}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
+            {data.map((item, index) => {
+              const total = item.green + item.yellow + item.red;
+              const compliance = Math.round((item.green / total) * 100) || 0;
+              let statusClass = '';
+              
+              if (compliance >= 80) statusClass = styles.compliant;
+              else if (compliance >= 50) statusClass = styles.expiring;
+              else statusClass = styles.expired;
+              
+              return (
+                <tr key={index}>
+                  <td className={styles.permitName}>{item.permiso}</td>
+                  <td className={styles.greenCell}>{item.green}</td>
+                  <td className={styles.yellowCell}>{item.yellow}</td>
+                  <td className={styles.redCell}>{item.red}</td>
+                  <td>{total}</td>
+                  <td className={statusClass}>{compliance}%</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -62,19 +54,15 @@ function ComplianceHeatMap({ data }) {
       <div className={styles.legend}>
         <div className={styles.legendItem}>
           <span className={`${styles.legendColor} ${styles.compliant}`}></span>
-          <span>Cumplido</span>
+          <span>Cumplido (≥80%)</span>
         </div>
         <div className={styles.legendItem}>
           <span className={`${styles.legendColor} ${styles.expiring}`}></span>
-          <span>Por vencer</span>
+          <span>Precaución (50-79%)</span>
         </div>
         <div className={styles.legendItem}>
           <span className={`${styles.legendColor} ${styles.expired}`}></span>
-          <span>Vencido</span>
-        </div>
-        <div className={styles.legendItem}>
-          <span className={`${styles.legendColor} ${styles.notApplicable}`}></span>
-          <span>No aplica</span>
+          <span>Crítico (≤50%)</span>
         </div>
       </div>
     </div>

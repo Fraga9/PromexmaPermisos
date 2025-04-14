@@ -1,100 +1,300 @@
+.timelineWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.timelineTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.8rem;
+  border-bottom: 3px solid #f0f2f5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.titleIcon {
+  color: #3498db;
+  font-size: 1.6rem;
+}
+
 .timelineContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  padding: 0.5rem;
+}
+
+.emptyContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
 }
 
 .emptyMessage {
   text-align: center;
-  color: #666;
-  font-size: 1rem;
-  padding: 2rem;
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  padding: 3rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  color: #bdc3c7;
 }
 
 .card {
+  position: relative;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  border-left: 6px solid transparent;
-  transition: transform 0.2s ease;
+  gap: 1rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .card:hover {
-  transform: scale(1.02);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.cardRibbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.cardRibbon::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  top: 0;
+  right: 0;
+  border-width: 0 80px 80px 0;
+  border-style: solid;
+  border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent;
+  z-index: 1;
+}
+
+.statusIndicator {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  z-index: 2;
 }
 
 .cardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .daysBadge {
   font-weight: bold;
-  font-size: 0.9rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 25px;
   color: white;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.daysBadge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.daysIcon {
+  font-size: 0.9rem;
 }
 
 .date {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: #666;
+  font-weight: 500;
+  margin-right: 15px;
 }
 
 .cardBody {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.8rem;
+  padding: 0.5rem 0;
 }
 
 .permitTitle {
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  color: #333;
+  color: #2c3e50;
   margin: 0;
+  line-height: 1.3;
+  position: relative;
+}
+
+.permitTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: currentColor;
+  opacity: 0.3;
+  border-radius: 3px;
 }
 
 .unitName {
-  font-size: 0.875rem;
-  color: #777;
+  font-size: 1rem;
+  color: #555;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.unitIcon {
+  color: #7f8c8d;
+}
+
+.cardFooter {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.detailButton {
+  background: transparent;
+  color: #3498db;
+  border: 1px solid #3498db;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.detailButton:hover {
+  background: #3498db;
+  color: white;
 }
 
 /* Color themes */
 .critical {
-  border-left-color: #f44336;
+  border-left: 5px solid #f44336;
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.08) 0%, rgba(244, 67, 54, 0.01) 100%);
+}
+
+.critical .statusIndicator {
+  background-color: #f44336;
+  box-shadow: 0 0 0 4px rgba(244, 67, 54, 0.2);
 }
 
 .critical .daysBadge {
-  background-color: #f44336;
+  background: linear-gradient(to right, #f44336, #d32f2f);
 }
 
 .warning {
-  border-left-color: #ff9800;
+  border-left: 5px solid #ff9800;
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.08) 0%, rgba(255, 152, 0, 0.01) 100%);
+}
+
+.warning .statusIndicator {
+  background-color: #ff9800;
+  box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.2);
 }
 
 .warning .daysBadge {
-  background-color: #ff9800;
+  background: linear-gradient(to right, #ff9800, #f57c00);
 }
 
 .normal {
-  border-left-color: #4caf50;
+  border-left: 5px solid #4caf50;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.08) 0%, rgba(76, 175, 80, 0.01) 100%);
+}
+
+.normal .statusIndicator {
+  background-color: #4caf50;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
 }
 
 .normal .daysBadge {
-  background-color: #4caf50;
+  background: linear-gradient(to right, #4caf50, #388e3c);
 }
 
 .expired {
-  border-left-color: #9e9e9e;
+  border-left: 5px solid #e74c3c;
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.08) 0%, rgba(231, 76, 60, 0.01) 100%);
+  opacity: 0.8;
+}
+
+.expired .statusIndicator {
+  background-color: #e74c3c;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.2);
 }
 
 .expired .daysBadge {
-  background-color: #9e9e9e;
+  background: linear-gradient(to right, #e74c3c, #c0392b);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.critical .statusIndicator {
+  animation: pulse 1.5s infinite;
+}
+
+@media (max-width: 768px) {
+  .timelineContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .timelineTitle {
+    font-size: 1.5rem;
+  }
 }
