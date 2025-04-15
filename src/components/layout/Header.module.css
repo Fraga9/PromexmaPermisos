@@ -1,23 +1,58 @@
 /* src/components/layout/Header.module.css */
 .header {
-    background-color: #ffffff; /* Blanco */
-    padding: 15px 20px;
-    border-bottom: 1px solid #e0e0e0; /* Línea sutil */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px; /* Altura fija */
-    flex-shrink: 0; /* Evita que se encoja */
-  }
-  
-  .title {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .userInfo {
-    font-size: 0.9rem;
-    color: #555;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 80vw;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loginButton {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.loginButton:hover {
+  background-color: #1d4ed8;
+}
+
+.logoutButton {
+  background-color: #ef4444;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  border: none;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background-color: #dc2626;
+}

@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { MdEdit, MdCheckCircle, MdCancel } from 'react-icons/md';
 import { Tooltip } from 'react-tooltip';
 import styles from './UnitHeader.module.css';
+import { useAuth } from '../../context/AuthContext'; // Importamos el contexto de autenticación
 
 function UnitHeader({ unit, compliancePercentage, onUpdateTitle }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(unit.nombre);
+  const { isAuthenticated } = useAuth(); // Usamos el hook de autenticación
 
   const handleSave = () => {
     if (!newTitle.trim()) return;
@@ -21,7 +23,7 @@ function UnitHeader({ unit, compliancePercentage, onUpdateTitle }) {
   return (
     <div className={styles.headerSection}>
       <div className={styles.unitHeader}>
-        {isEditing ? (
+        {isAuthenticated && isEditing ? (
           <div className={styles.titleEditContainer}>
             <input
               type="text"
@@ -55,15 +57,17 @@ function UnitHeader({ unit, compliancePercentage, onUpdateTitle }) {
         ) : (
           <div className={styles.titleDisplay}>
             <h1>{unit.nombre}</h1>
-            <button
-              onClick={() => setIsEditing(true)}
-              className={styles.editTitleButton}
-              data-tooltip-id="edit-title"
-              data-tooltip-content="Editar título"
-            >
-              <MdEdit />
-            </button>
-            <Tooltip id="edit-title" place="top" />
+            {isAuthenticated && (
+              <button
+                onClick={() => setIsEditing(true)}
+                className={styles.editTitleButton}
+                data-tooltip-id="edit-title"
+                data-tooltip-content="Editar título"
+              >
+                <MdEdit />
+              </button>
+            )}
+            {isAuthenticated && <Tooltip id="edit-title" place="top" />}
           </div>
         )}
         <span className={unit.activo ? styles.statusActive : styles.statusInactive}>

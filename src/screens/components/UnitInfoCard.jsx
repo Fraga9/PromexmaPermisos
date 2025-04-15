@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MdEdit, MdCheckCircle, MdCancel } from 'react-icons/md';
 import styles from './UnitInfoCard.module.css';
+import { useAuth } from '../../context/AuthContext'; // Importamos el contexto de autenticación
 
 // Helper to format dates
 const formatDate = (dateString) => {
@@ -16,6 +17,7 @@ const formatDate = (dateString) => {
 function UnitInfoCard({ unit, onUpdateField }) {
   const [editingField, setEditingField] = useState(null);
   const [editFieldValue, setEditFieldValue] = useState('');
+  const { isAuthenticated } = useAuth(); // Usamos el hook de autenticación
 
   const handleStartEditing = (fieldName, currentValue) => {
     setEditingField(fieldName);
@@ -36,7 +38,7 @@ function UnitInfoCard({ unit, onUpdateField }) {
   const EditableField = ({ label, fieldName, value, type = 'text' }) => (
     <div className={styles.infoItem}>
       <span className={styles.infoLabel}>{label}</span>
-      {editingField === fieldName ? (
+      {isAuthenticated && editingField === fieldName ? (
         <div className={styles.fieldEditContainer}>
           <input
             type={type}
@@ -57,12 +59,14 @@ function UnitInfoCard({ unit, onUpdateField }) {
       ) : (
         <div className={styles.fieldDisplay}>
           <span className={styles.infoValue}>{value || '-'}</span>
-          <button
-            onClick={() => handleStartEditing(fieldName, value)}
-            className={styles.editFieldButton}
-          >
-            <MdEdit />
-          </button>
+          {isAuthenticated && (
+            <button
+              onClick={() => handleStartEditing(fieldName, value)}
+              className={styles.editFieldButton}
+            >
+              <MdEdit />
+            </button>
+          )}
         </div>
       )}
     </div>

@@ -4,9 +4,11 @@ import { es } from 'date-fns/locale';
 import styles from './PermitsCard.module.css';
 import PermitRow from './PermitRow';
 import AddPermitForm from './AddPermitForm';
+import { useAuth } from '../../context/AuthContext'; // Importamos el contexto de autenticación
 
 function PermitsCard({ permits, unit, onAddPermit, onUpdatePermit, onDeletePermit }) {
   const [isAddingPermit, setIsAddingPermit] = useState(false);
+  const { isAuthenticated } = useAuth(); // Usamos el hook de autenticación
 
   // List of available permit types
   const availablePermits = [
@@ -17,7 +19,7 @@ function PermitsCard({ permits, unit, onAddPermit, onUpdatePermit, onDeletePermi
     'Licencia De Imagen Urbana (Anuncios) (Lia)',
     'Pago Del Impuesto Predial (Predial)',
     'Licencia O Factibilidad De Uso De Suelo (Lus)',
-    'Titulo De Propiedad, Escritura O Contrato De Arrendamiento (Ca)'
+    'Titulo De Propiedad, Escritura O Contrato De Arrendamiento (CA)'
   ];
 
   // Export permits data to CSV
@@ -81,17 +83,19 @@ function PermitsCard({ permits, unit, onAddPermit, onUpdatePermit, onDeletePermi
           >
             Exportar CSV
           </button>
-          <button
-            className={styles.addPermitButton}
-            onClick={() => setIsAddingPermit(!isAddingPermit)}
-          >
-            {isAddingPermit ? 'Cancelar' : 'Añadir Permiso'}
-          </button>
+          {isAuthenticated && (
+            <button
+              className={styles.addPermitButton}
+              onClick={() => setIsAddingPermit(!isAddingPermit)}
+            >
+              {isAddingPermit ? 'Cancelar' : 'Añadir Permiso'}
+            </button>
+          )}
         </div>
       </div>
 
       {/* Form for adding new permit */}
-      {isAddingPermit && (
+      {isAuthenticated && isAddingPermit && (
         <AddPermitForm 
           availablePermits={availablePermits}
           unit={unit}
@@ -104,13 +108,13 @@ function PermitsCard({ permits, unit, onAddPermit, onUpdatePermit, onDeletePermi
           <thead>
             <tr>
               <th>Permiso</th>
-              <th>Nueva Vigencia</th>
+              {isAuthenticated ? <th>Nueva Vigencia</th> : null}
               <th>Vigencia Actual</th>
               <th>Estatus</th>
               <th>Ponderación</th>
               <th>Puntaje</th>
               <th>Comentarios</th>
-              <th>Acciones</th>
+              {isAuthenticated ? <th>Acciones</th> : null}
             </tr>
           </thead>
           <tbody>
@@ -125,7 +129,7 @@ function PermitsCard({ permits, unit, onAddPermit, onUpdatePermit, onDeletePermi
               ))
             ) : (
               <tr>
-                <td colSpan="8" className={styles.noResults}>
+                <td colSpan={isAuthenticated ? "8" : "6"} className={styles.noResults}>
                   Esta unidad no tiene permisos registrados.
                 </td>
               </tr>

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import styles from './UnitDetailScreen.module.css';
 import { MdArrowBack } from 'react-icons/md';
+import { useAuth } from '../context/AuthContext'; // Importamos el contexto de autenticación
 
 // Import components
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -35,6 +36,7 @@ function UnitDetailScreen() {
   const [error, setError] = useState(null);
   const [compliancePercentage, setCompliancePercentage] = useState(0);
   const [toast, setToast] = useState({ visible: false, message: '', type: '' });
+  const { isAuthenticated } = useAuth(); // Usamos el hook de autenticación
 
   // Toast notification handler
   const showToast = (message, type = 'success') => {
@@ -86,6 +88,11 @@ function UnitDetailScreen() {
 
   // Handle unit data updates
   const handleUnitUpdate = async (updatedData) => {
+    if (!isAuthenticated) {
+      showToast('No tienes permisos para realizar esta acción', 'error');
+      return;
+    }
+    
     try {
       const { error } = await supabase
         .from('unidades_operativas')
@@ -105,6 +112,11 @@ function UnitDetailScreen() {
   // Handle permit operations (CRUD)
   const handlePermitOperation = {
     add: async (newPermit) => {
+      if (!isAuthenticated) {
+        showToast('No tienes permisos para realizar esta acción', 'error');
+        return false;
+      }
+      
       try {
         const permitToAdd = {
           ...newPermit,
@@ -129,6 +141,11 @@ function UnitDetailScreen() {
       }
     },
     update: async (permitId, updateData) => {
+      if (!isAuthenticated) {
+        showToast('No tienes permisos para realizar esta acción', 'error');
+        return false;
+      }
+      
       try {
         const { error } = await supabase
           .from('permisos')
@@ -147,6 +164,11 @@ function UnitDetailScreen() {
       }
     },
     delete: async (permitId) => {
+      if (!isAuthenticated) {
+        showToast('No tienes permisos para realizar esta acción', 'error');
+        return false;
+      }
+      
       try {
         const { error } = await supabase
           .from('permisos')

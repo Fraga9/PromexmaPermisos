@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MdSave, MdEdit, MdCheckCircle, MdCancel, MdDelete } from 'react-icons/md';
 import { Tooltip } from 'react-tooltip';
 import styles from './PermitRow.module.css';
+import { useAuth } from '../../context/AuthContext'; // Importamos el contexto de autenticación
 
 // Helper to format dates
 const formatDate = (dateString) => {
@@ -33,6 +34,7 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
   const [isEditingComment, setIsEditingComment] = useState(false);
   const [newComment, setNewComment] = useState(permit.comentarios || '');
   const [isUpdating, setIsUpdating] = useState(false);
+  const { isAuthenticated } = useAuth(); // Usamos el hook de autenticación
 
   // Status to visual class mapping
   const statusClassMap = {
@@ -84,28 +86,32 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
         <Tooltip id={`permit-name-${permit.id}`} place="top" />
       </td>
       <td>
-        <div className={styles.dateInputContainer}>
-          <input
-            type="date"
-            value={newDate}
-            onChange={handleDateChange}
-            className={styles.dateInput}
-            disabled={isUpdating}
-            data-tooltip-id={`date-picker-${permit.id}`}
-            data-tooltip-content="Selecciona nueva fecha de vigencia"
-          />
-          <Tooltip id={`date-picker-${permit.id}`} place="top" />
-          <button
-            onClick={handleSaveDate}
-            disabled={isUpdating || newDate === permit.vigencia}
-            className={styles.iconButton}
-            data-tooltip-id={`save-date-${permit.id}`}
-            data-tooltip-content="Guardar nueva fecha"
-          >
-            <MdSave />
-          </button>
-          <Tooltip id={`save-date-${permit.id}`} place="top" />
-        </div>
+        {isAuthenticated ? (
+          <div className={styles.dateInputContainer}>
+            <input
+              type="date"
+              value={newDate}
+              onChange={handleDateChange}
+              className={styles.dateInput}
+              disabled={isUpdating}
+              data-tooltip-id={`date-picker-${permit.id}`}
+              data-tooltip-content="Selecciona nueva fecha de vigencia"
+            />
+            <Tooltip id={`date-picker-${permit.id}`} place="top" />
+            <button
+              onClick={handleSaveDate}
+              disabled={isUpdating || newDate === permit.vigencia}
+              className={styles.iconButton}
+              data-tooltip-id={`save-date-${permit.id}`}
+              data-tooltip-content="Guardar nueva fecha"
+            >
+              <MdSave />
+            </button>
+            <Tooltip id={`save-date-${permit.id}`} place="top" />
+          </div>
+        ) : (
+          formatDate(permit.vigencia)
+        )}
       </td>
       <td>{formatDate(permit.vigencia)}</td>
       <td>
@@ -116,7 +122,7 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
       <td>{permit.ponderacion ?? '-'}</td>
       <td>{permit.puntaje ?? '-'}</td>
       <td>
-        {isEditingComment ? (
+        {isAuthenticated && isEditingComment ? (
           <div className={styles.commentEditContainer}>
             <textarea
               value={newComment}
@@ -152,28 +158,34 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
         ) : (
           <div className={styles.commentDisplay}>
             <span className={styles.commentText}>{permit.comentarios || '-'}</span>
-            <button
-              onClick={() => setIsEditingComment(true)}
-              className={styles.editCommentButton}
-              data-tooltip-id={`edit-comment-${permit.id}`}
-              data-tooltip-content="Editar comentario"
-            >
-              <MdEdit />
-            </button>
-            <Tooltip id={`edit-comment-${permit.id}`} place="top" />
+            {isAuthenticated && (
+              <button
+                onClick={() => setIsEditingComment(true)}
+                className={styles.editCommentButton}
+                data-tooltip-id={`edit-comment-${permit.id}`}
+                data-tooltip-content="Editar comentario"
+              >
+                <MdEdit />
+              </button>
+            )}
+            {isAuthenticated && <Tooltip id={`edit-comment-${permit.id}`} place="top" />}
           </div>
         )}
       </td>
       <td>
-        <button
-          onClick={handleDeletePermit}
-          className={`${styles.iconButton} ${styles.deleteIcon}`}
-          data-tooltip-id={`delete-permit-${permit.id}`}
-          data-tooltip-content="Eliminar permiso"
-        >
-          <MdDelete />
-        </button>
-        <Tooltip id={`delete-permit-${permit.id}`} place="top" />
+        {isAuthenticated && (
+          <>
+            <button
+              onClick={handleDeletePermit}
+              className={`${styles.iconButton} ${styles.deleteIcon}`}
+              data-tooltip-id={`delete-permit-${permit.id}`}
+              data-tooltip-content="Eliminar permiso"
+            >
+              <MdDelete />
+            </button>
+            <Tooltip id={`delete-permit-${permit.id}`} place="top" />
+          </>
+        )}
       </td>
     </tr>
   );

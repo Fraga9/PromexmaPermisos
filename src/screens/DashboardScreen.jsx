@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import KPICards from '../components/dashboard/KPICards';
-import StatusBarChart from '../components/dashboard/StatusBarChart';
+import WeightedRegionComplianceChart from '../components/dashboard/WeightedRegionComplianceChart';
 import ComplianceHeatMap from '../components/dashboard/ComplianceHeatMap';
 import UnitRanking from '../components/dashboard/UnitRanking';
 import PermitTimeline from '../components/dashboard/PermitTimeline';
@@ -53,8 +53,7 @@ function DashboardScreen() {
 
       {/* Sección 2: Gráfica de barras por estatus */}
       <section className={styles.section}>
-        <h2>Distribución de Permisos por Estatus</h2>
-        <StatusBarChart data={dashboardData?.statusDistribution} />
+        <WeightedRegionComplianceChart data={dashboardData?.complianceByRegion} />
       </section>
 
       <div className={styles.gridContainer}>
