@@ -42,7 +42,7 @@ function UnitsListScreen() {
       });
 
       setAllUnits(unitsWithCompliance);
-      console.log("Fetched all units:", unitsWithCompliance);
+      
 
       // Aplicar filtros y ordenamiento a los datos obtenidos
       applyFiltersAndPagination(unitsWithCompliance);

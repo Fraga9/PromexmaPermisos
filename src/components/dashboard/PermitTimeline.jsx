@@ -7,7 +7,6 @@ function PermitTimeline({ data }) {
   if (!data || data.length === 0) {
     return <div className={styles.emptyMessage}>No hay permisos críticos próximos a vencer</div>;
   }
-  console.log('PermitTimeline Props:', data); // Log de los datos recibidos
 
   const sortedPermits = [...data]
     .sort((a, b) => new Date(a.vigencia) - new Date(b.vigencia))

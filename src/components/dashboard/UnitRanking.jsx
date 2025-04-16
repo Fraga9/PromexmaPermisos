@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styles from './UnitRanking.module.css';
 
 function UnitRanking({ data }) {
-  console.log('UnitRanking Data:', data);
   const [showTopUnits, setShowTopUnits] = useState(true);
   
   if (!data || (!data.topUnits && !data.bottomUnits) || 

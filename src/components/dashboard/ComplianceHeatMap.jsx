@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './ComplianceHeatMap.module.css';
 
 function ComplianceHeatMap({ data }) {
-  console.log('ComplianceHeatMap Props:', data);
   
   if (!data || data.length === 0) {
     return (

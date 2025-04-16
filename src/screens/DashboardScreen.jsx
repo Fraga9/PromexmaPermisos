@@ -22,7 +22,7 @@ function DashboardScreen() {
       try {
         // Llamada a función RPC en Supabase para obtener todos los datos del dashboard
         const { data, error: rpcError } = await supabase.rpc('get_dashboard_data');
-        console.log('RPC Response:', data, rpcError); // Log de la respuesta de la RPC
+        
 
         if (rpcError) throw rpcError;
         setDashboardData(data || {});
