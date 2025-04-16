@@ -2,17 +2,18 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rankingSection {
+  margin-bottom: 1.5rem;
 }
 
 .rankingTitle {
   margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: #333;
-  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
 }
 
 .rankingList {
@@ -29,22 +30,22 @@
   align-items: center;
   gap: 1rem;
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
 }
 
 .rankingItem:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.15);
 }
 
 .rankNumber {
   font-size: 1.5rem;
   font-weight: bold;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,12 +69,14 @@
   color: #555;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .region {
   background-color: #e0e0e0;
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.75rem;
   font-size: 0.75rem;
 }
 
@@ -81,7 +84,7 @@
   font-size: 1.25rem;
   font-weight: bold;
   padding: 0.25rem 0.75rem;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   background-color: #f5f5f5;
 }
 
@@ -98,4 +101,123 @@
 .low {
   color: #fff;
   background-color: #f44336;
+}
+
+@media (max-width: 30rem) { /* 480px */
+  .unitInfo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .rankingItem {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Estilos mejorados para el Toggle Switch */
+.toggleContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+
+.toggleSwitch {
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 3rem;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: relative;
+  padding: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.toggleSwitch::before {
+  content: '';
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+  height: calc(100% - 0.5rem);
+  width: calc(50% - 0.5rem);
+  background-color: #0078d4;
+  border-radius: 2.5rem;
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  z-index: 1;
+  transform: translateX(0);
+}
+
+.toggleSwitch.rightActive::before {
+  transform: translateX(100%);
+}
+
+.toggleButton {
+  padding: 0.625rem 1.5rem;
+  background: none;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #555;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+.toggleButton:focus {
+  outline: none;
+}
+
+.toggleButton.active {
+  color: white;
+  font-weight: 600;
+}
+
+.toggleButton:not(.active) {
+  color: #555;
+}
+
+.toggleButton:hover:not(.active) {
+  color: #333;
+}
+
+/* Efecto de hover corregido para que coincida con la forma del indicador activo */
+.toggleButton::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 120, 212, 0.1);
+  border-radius: 2.5rem; /* Mismo valor que el indicador activo */
+  transform: scale(0.9); /* Ligeramente más pequeño que el botón */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.toggleButton:hover::after {
+  opacity: 1;
+}
+
+.toggleButton:active::after {
+  background-color: rgba(0, 120, 212, 0.2);
+}
+
+/* Animación mejorada para el cambio de contenido */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rankingSection {
+  animation: fadeIn 0.4s ease-out forwards;
 }

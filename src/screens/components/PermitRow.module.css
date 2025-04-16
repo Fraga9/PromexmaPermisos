@@ -4,24 +4,24 @@
     display: table-row;
     background-color: #ffffff;
     transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.06);
 }
 
 .tableRow:hover {
     background-color: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
 }
 
 .tableRow td {
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     vertical-align: middle;
-    font-size: 0.95rem;
+    font-size: clamp(0.8125rem, 0.7vw + 0.6rem, 0.95rem);
     color: #495057;
     position: relative;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 250px;
+    max-width: min(15.625rem, 40vw);
 }
 
 .tableRow td:first-child {
@@ -35,21 +35,22 @@
     align-items: center;
     gap: 0.5rem;
     position: relative;
+    flex-wrap: wrap;
 }
 
 .dateInput {
-    padding: 8px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+    border: 0.0625rem solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: clamp(0.8125rem, 0.7vw + 0.6rem, 0.95rem);
     transition: all 0.2s ease-in-out;
-    width: 140px;
+    width: clamp(7.5rem, 100%, 8.75rem);
 }
 
 .dateInput:focus {
     outline: none;
     border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 0.125rem rgba(0, 123, 255, 0.25);
 }
 
 .dateInput:disabled {
@@ -68,8 +69,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px;
-    border-radius: 4px;
+    padding: 0.375rem;
+    border-radius: 0.25rem;
 }
 
 .iconButton:hover {
@@ -86,13 +87,13 @@
 /* Estilos para insignias de estado */
 .statusBadge {
     display: inline-block;
-    padding: 6px 10px;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    padding: 0.375rem 0.625rem;
+    border-radius: 1.25rem;
+    font-size: clamp(0.75rem, 0.7vw + 0.55rem, 0.85rem);
     font-weight: 600;
     text-align: center;
     transition: all 0.2s ease;
-    min-width: 90px;
+    min-width: 5.625rem;
 }
 
 .statusVigente {
@@ -120,17 +121,17 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    min-width: 200px;
+    min-width: clamp(9.375rem, 100%, 12.5rem);
 }
 
 .commentTextarea {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 0.95rem;
+    padding: 0.625rem 0.75rem;
+    border: 0.0625rem solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: clamp(0.8125rem, 0.7vw + 0.6rem, 0.95rem);
     resize: vertical;
-    min-height: 60px;
+    min-height: 3.75rem;
     transition: all 0.2s ease-in-out;
     font-family: inherit;
 }
@@ -138,7 +139,7 @@
 .commentTextarea:focus {
     outline: none;
     border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 0.125rem rgba(0, 123, 255, 0.25);
 }
 
 .commentTextarea:disabled {
@@ -175,11 +176,11 @@
     align-items: flex-start;
     gap: 0.75rem;
     position: relative;
-    min-height: 24px;
+    min-height: 1.5rem;
 }
 
 .commentText {
-    font-size: 0.95rem;
+    font-size: clamp(0.8125rem, 0.7vw + 0.6rem, 0.95rem);
     color: #495057;
     line-height: 1.5;
     flex: 1;
@@ -197,8 +198,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;
-    border-radius: 4px;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
     opacity: 0.6;
     margin-left: auto;
     flex-shrink: 0;
@@ -220,21 +221,21 @@
 }
 
 /* Media Queries para diseño responsivo */
-@media (max-width: 992px) {
+@media (max-width: 62rem) { /* 992px */
     .tableRow td {
-        padding: 10px 12px;
+        padding: 0.625rem 0.75rem;
     }
     
     .dateInput {
-        width: 120px;
+        width: clamp(6.25rem, 100%, 7.5rem);
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) { /* 768px */
     .tableRow td {
-        padding: 8px 10px;
-        font-size: 0.9rem;
-        max-width: 150px;
+        padding: 0.5rem 0.625rem;
+        font-size: clamp(0.75rem, 0.6vw + 0.55rem, 0.9rem);
+        max-width: clamp(5rem, 40vw, 9.375rem);
     }
     
     .dateInputContainer {
@@ -245,6 +246,7 @@
     
     .dateInput {
         width: 100%;
+        min-width: 7.5rem;
     }
     
     .commentEditContainer {
@@ -256,28 +258,29 @@
     }
     
     .statusBadge {
-        padding: 4px 8px;
-        font-size: 0.8rem;
-        min-width: 80px;
+        padding: 0.25rem 0.5rem;
+        font-size: clamp(0.6875rem, 0.6vw + 0.5rem, 0.8rem);
+        min-width: 5rem;
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 36rem) { /* 576px */
     .tableRow {
         display: flex;
         flex-direction: column;
-        padding: 12px;
-        margin-bottom: 12px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+        border: 0.0625rem solid rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
     }
     
     .tableRow td {
         display: flex;
         justify-content: space-between;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        padding: 8px 0;
+        border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.05);
+        padding: 0.5rem 0;
         max-width: none;
+        white-space: normal;
     }
     
     .tableRow td:last-child {
@@ -288,14 +291,14 @@
         content: attr(data-label);
         font-weight: 600;
         color: #343a40;
-        margin-right: 12px;
+        margin-right: 0.75rem;
         flex: 1;
     }
     
     .commentDisplay {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 0.5rem;
         flex: 2;
     }
     

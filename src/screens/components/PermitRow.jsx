@@ -81,12 +81,12 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
 
   return (
     <tr className={styles.tableRow}>
-      <td data-tooltip-id={`permit-name-${permit.id}`} data-tooltip-content={permit.permiso}>
+      <td data-label="Permiso" data-tooltip-id={`permit-name-${permit.id}`} data-tooltip-content={permit.permiso}>
         {permit.permiso}
         <Tooltip id={`permit-name-${permit.id}`} place="top" />
       </td>
-      <td>
-        {isAuthenticated ? (
+      {isAuthenticated && (
+        <td data-label="Nueva Vigencia">
           <div className={styles.dateInputContainer}>
             <input
               type="date"
@@ -109,19 +109,17 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
             </button>
             <Tooltip id={`save-date-${permit.id}`} place="top" />
           </div>
-        ) : (
-          formatDate(permit.vigencia)
-        )}
-      </td>
-      <td>{formatDate(permit.vigencia)}</td>
-      <td>
+        </td>
+      )}
+      <td data-label="Vigencia Actual">{formatDate(permit.vigencia)}</td>
+      <td data-label="Estatus">
         <span className={`${styles.statusBadge} ${statusClass}`}>
           {statusVisual}
         </span>
       </td>
-      <td>{permit.ponderacion ?? '-'}</td>
-      <td>{permit.puntaje ?? '-'}</td>
-      <td>
+      <td data-label="Ponderación">{permit.ponderacion ?? '-'}</td>
+      <td data-label="Puntaje">{permit.puntaje ?? '-'}</td>
+      <td data-label="Comentarios">
         {isAuthenticated && isEditingComment ? (
           <div className={styles.commentEditContainer}>
             <textarea
@@ -172,21 +170,19 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
           </div>
         )}
       </td>
-      <td>
-        {isAuthenticated && (
-          <>
-            <button
-              onClick={handleDeletePermit}
-              className={`${styles.iconButton} ${styles.deleteIcon}`}
-              data-tooltip-id={`delete-permit-${permit.id}`}
-              data-tooltip-content="Eliminar permiso"
-            >
-              <MdDelete />
-            </button>
-            <Tooltip id={`delete-permit-${permit.id}`} place="top" />
-          </>
-        )}
-      </td>
+      {isAuthenticated && (
+        <td data-label="Acciones">
+          <button
+            onClick={handleDeletePermit}
+            className={`${styles.iconButton} ${styles.deleteIcon}`}
+            data-tooltip-id={`delete-permit-${permit.id}`}
+            data-tooltip-content="Eliminar permiso"
+          >
+            <MdDelete />
+          </button>
+          <Tooltip id={`delete-permit-${permit.id}`} place="top" />
+        </td>
+      )}
     </tr>
   );
 }

@@ -81,7 +81,7 @@ function WeightedRegionComplianceChart({ data }) {
   const dataKey = showMode === 'weighted' ? 'porcentajePonderado' : 'porcentajeSimple';
   
   return (
-    <div className={styles.chartContainer}>
+    <>
       <div className={styles.chartHeader}>
         <h2 className={styles.chartTitle}>
           Porcentaje de Cumplimiento por Región
@@ -197,7 +197,7 @@ function WeightedRegionComplianceChart({ data }) {
           <span>Crítico (≤70%)</span>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

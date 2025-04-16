@@ -13,6 +13,19 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+@media (max-width: 48rem) { /* 768px */
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 30rem) { /* 480px */
+  :root {
+    font-size: 12px;
+  }
 }
 
 a {
@@ -26,22 +39,20 @@ a:hover {
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 20rem; /* 320px base para móviles pequeños */
   min-height: 100dvh; /* Dynamic Viewport Height */
   background-color: var(--background-color);
 }
 
 .appContainer {
-  max-width: calc(90dvw - 10%);
-  /* Ajustado para evitar overflow */
+  max-width: 90vw;
   margin: 0 auto;
   padding: 2% 4%;
-  /* Reducido para mantener consistencia */
   box-sizing: border-box;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: clamp(1.75rem, 5vw, 3.2rem);
   line-height: 1.1;
 }
 
@@ -51,8 +62,8 @@ h1, h2, h3 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -67,7 +78,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 0.25rem auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {

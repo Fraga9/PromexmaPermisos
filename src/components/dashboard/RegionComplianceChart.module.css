@@ -2,15 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  padding: 1.5rem;
-  transition: all 0.3s ease;
 }
 
 .chartContainer:hover {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
 }
 
 .chartHeader {

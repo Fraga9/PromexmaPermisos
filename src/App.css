@@ -6,20 +6,32 @@ body {
 }
 
 .appContainer {
-  max-width: calc(90dvw - 10%); /* Ajustado para evitar overflow */
+  width: 100%;
+  max-width: 90vw;
   margin: 0 auto;
-  padding: 2% 4%; /* Reducido para mantener consistencia */
+  padding: 2% 4%;
   box-sizing: border-box;
 }
 
 header {
-  width: calc(100% - 2%); /* Ajustado para evitar overflow */
-  padding: 1% 1%;
+  width: 100%;
+  padding: 1%;
   background-color: #ffffff;
 }
 
 footer {
-  width: 100%; /* Ocupa todo el ancho del contenedor */
+  width: 100%;
   padding: 1% 0;
   text-align: center;
+}
+
+@media (max-width: 48rem) { /* 768px */
+  .appContainer {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  
+  header {
+    padding: 0.5rem;
+  }
 }

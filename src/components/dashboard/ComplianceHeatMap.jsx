@@ -6,11 +6,20 @@ function ComplianceHeatMap({ data }) {
   
   if (!data || data.length === 0) {
     return (
-      <div className={styles.heatmapContainer}>
-        <div className={styles.noData}>No hay datos disponibles para la matriz de cumplimiento</div>
-      </div>
+      <div className={styles.noData}>No hay datos disponibles para la matriz de cumplimiento</div>
     );
   }
+
+  // Ordenar datos por porcentaje de cumplimiento (de mayor a menor)
+  const sortedData = [...data].sort((a, b) => {
+    const totalA = a.green + a.yellow + a.red;
+    const totalB = b.green + b.yellow + b.red;
+    
+    const complianceA = totalA === 0 ? 0 : (a.green / totalA) * 100;
+    const complianceB = totalB === 0 ? 0 : (b.green / totalB) * 100;
+    
+    return complianceB - complianceA; // Orden descendente
+  });
 
   return (
     <div className={styles.heatmapContainer}>
@@ -27,7 +36,7 @@ function ComplianceHeatMap({ data }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => {
+            {sortedData.map((item, index) => {
               const total = item.green + item.yellow + item.red;
               const compliance = Math.round((item.green / total) * 100) || 0;
               let statusClass = '';
