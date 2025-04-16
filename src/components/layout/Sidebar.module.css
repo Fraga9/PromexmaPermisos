@@ -1,5 +1,7 @@
 /* src/components/layout/Sidebar.module.css */
 .sidebar {
+    position: fixed; /* Mantiene la barra lateral fija */
+    height: 100vh; /* Altura completa de la ventana */
     width: calc(20dvw - 4%);
     /* Ajuste para evitar overflow */
     max-width: 240px;
@@ -7,7 +9,8 @@
     background-color: #2c3e50;
     color: #ecf0f1;
     padding: 1% 0;
-    /* Reducido para evitar overflow */
+    overflow-y: auto; /* Permite scroll dentro de la sidebar si el contenido es largo */
+    z-index: 1000; /* Asegura que la sidebar esté por encima de otros elementos */
 }
 
 .logo {
