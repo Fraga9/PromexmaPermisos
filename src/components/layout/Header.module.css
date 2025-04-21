@@ -4,17 +4,31 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   max-width: 80vw;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  position: relative;
+  z-index: 1200;
+}
+
+@media (max-width: 48rem) {
+  .header {
+    padding: 0.75rem 0.5rem;
+    max-width: 100vw;
+    border-radius: 0;
+    width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+  }
 }
 
 .title {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: #ee341d;
+  letter-spacing: 0.5px;
 }
 
 .userSection {
@@ -29,30 +43,66 @@
 }
 
 .loginButton {
-  background-color: #2563eb;
-  color: white;
+  background-color: #ee341d;
+  color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   border: none;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
+  transition: background 0.2s;
 }
 
 .loginButton:hover {
-  background-color: #1d4ed8;
+  background-color: #c92a13;
 }
 
 .logoutButton {
-  background-color: #ef4444;
-  color: white;
+  background-color: #5f636e;
+  color: #fff;
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
   border: none;
   margin-left: 1rem;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 .logoutButton:hover {
-  background-color: #dc2626;
+  background-color: #3d3f45;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #ee341d;
+  margin-right: 1.25rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background 0.2s;
+  z-index: 1300;
+  position: static;
+}
+
+.hamburger:focus,
+.hamburger:hover {
+  background: #ffe5e0;
+}
+
+@media (max-width: 48rem) {
+  .hamburger {
+    display: flex;
+    position: static;
+    margin-right: 1rem;
+    box-shadow: none;
+    background: none;
+    border: none;
+    width: auto;
+    height: auto;
+  }
 }

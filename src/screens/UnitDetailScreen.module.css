@@ -1,11 +1,8 @@
 .screenContainer {
-    width: 100%;
-    max-width: 75vw;
-    margin: 0 auto;
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .loadingContainer {
@@ -45,6 +42,7 @@
     .screenContainer {
         padding: 0.75rem;
         gap: 1.25rem;
+        max-width: 90dvw;
     }
     
     .headerWrapper {
@@ -56,5 +54,16 @@
     .screenContainer {
         padding: 0.5rem;
         gap: 1rem;
+    }
+    /* Mejora visual para tarjetas de permisos en móviles */
+    .permitsCardMobile {
+        box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.08);
+        border-radius: 0.75rem;
+        background: #fff;
+        margin-bottom: 1rem;
+        padding: 0.75rem 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
     }
 }

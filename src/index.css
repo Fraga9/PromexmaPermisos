@@ -3,12 +3,19 @@
 
 
 :root {
+  --color-primary: #ee341d;
+  --color-secondary: #5f636e;
+  --color-bg: #fff8f6;
+  --color-bg-card: #fff;
+  --color-text: #222;
+  --color-text-secondary: #5f636e;
+  --color-accent: #fff2ef;
   font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.6;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(33, 37, 41, 0.87);
-  background-color: #f8f9fa;
+  color: var(--color-text);
+  background-color: var(--color-bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,18 +37,19 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-primary);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #b3240f;
 }
 
 body {
   margin: 0;
   min-width: 20rem; /* 320px base para móviles pequeños */
   min-height: 100dvh; /* Dynamic Viewport Height */
-  background-color: var(--background-color);
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 .appContainer {
@@ -57,8 +65,8 @@ h1 {
 }
 
 h1, h2, h3 {
-  font-weight: 500;
-  color: #343a40;
+  font-weight: 600;
+  color: var(--color-primary);
 }
 
 button {
@@ -68,13 +76,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-primary);
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.25s, border-color 0.25s;
 }
 button:hover {
-  background-color: #0056b3;
+  background-color: #b3240f;
 }
 button:focus,
 button:focus-visible {

@@ -1,8 +1,4 @@
 /* src/screens/UnitsListScreen.module.css */
-.screenContainer {
-    padding: 2% 2%;
-    max-width: 80vw;
-}
 
 .screenContainer h1 {
     margin-bottom: 24px; 
