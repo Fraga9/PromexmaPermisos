@@ -114,7 +114,7 @@ function PermitsCard({ permits, unit, onAddPermit, onUpdatePermit, onDeletePermi
               <th>Ponderación</th>
               <th>Puntaje</th>
               <th>Comentarios</th>
-              {isAuthenticated ? <th>Acciones</th> : null}
+              <th>Acciones</th> {/* Always show this column for document actions */}
             </tr>
           </thead>
           <tbody>
@@ -129,7 +129,7 @@ function PermitsCard({ permits, unit, onAddPermit, onUpdatePermit, onDeletePermi
               ))
             ) : (
               <tr>
-                <td colSpan={isAuthenticated ? "8" : "6"} className={styles.noResults}>
+                <td colSpan={isAuthenticated ? "8" : "7"} className={styles.noResults}>
                   Esta unidad no tiene permisos registrados.
                 </td>
               </tr>

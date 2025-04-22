@@ -1,0 +1,219 @@
+.uploadFileContainer {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.filesList {
+    margin-bottom: 15px;
+}
+
+.filesList h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.filesList ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fileItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.fileNameContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.newUpload {
+    background-color: #fff8e1;
+    border-color: #ffe082;
+}
+
+.newFileIndicator {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: #f57c00;
+    font-size: 0.75rem;
+}
+
+.newFileIndicator svg {
+    font-size: 1rem;
+}
+
+.newFileText {
+    font-weight: 500;
+}
+
+.fileName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.85rem;
+}
+
+.fileActions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.actionIcon {
+    font-size: 20px;
+    color: #555;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.actionIcon:hover {
+    transform: scale(1.2);
+}
+
+.deleteIcon {
+    color: #e53935;
+}
+
+.deleteIcon:hover {
+    color: #c62828;
+}
+
+.fileActions {
+    display: flex;
+    gap: 5px;
+}
+
+/* Match exactly the icon button styling from PermitRow */
+.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.iconButton:hover {
+    background-color: #e0e0e0;
+}
+
+/* Style for the icon itself */
+.buttonIcon {
+    font-size: 1.2rem; /* Match the font-size used in PermitRow */
+    width: auto;
+    height: auto;
+    display: block; /* Ensures the icon is properly centered */
+}
+
+.deleteIcon {
+    color: #e53935;
+}
+
+.deleteIcon:hover {
+    background-color: #ffebee;
+}
+
+.uploadControls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.uploadButton {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    border: 1px dashed #0077cc;
+    border-radius: 4px;
+    background-color: #e6f7ff;
+    color: #0077cc;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.uploadButton:hover {
+    background-color: #cceeff;
+}
+
+.uploadButton .buttonIcon {
+    margin-right: 8px;
+}
+
+.fileInput {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.uploadError {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 8px;
+    background-color: #ffebee;
+    border-radius: 4px;
+}
+
+.uploadError .buttonIcon {
+    font-size: 1.2rem;
+}
+
+.uploadSuccess {
+    color: #388e3c;
+    font-size: 0.85rem;
+    padding: 5px 8px;
+    background-color: #e8f5e9;
+    border-radius: 4px;
+}
+
+.uploadHelp {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.limitMessage {
+    color: #f57c00;
+    font-size: 0.85rem;
+    padding: 8px;
+    background-color: #fff8e1;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .fileItem {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fileActions {
+        margin-top: 8px;
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

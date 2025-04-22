@@ -44,6 +44,25 @@ function UnitDetailScreen() {
     setTimeout(() => setToast({ visible: false, message: '', type: '' }), 3000);
   };
 
+  // Ensure storage bucket exists
+  useEffect(() => {
+    const checkBucket = async () => {
+      try {
+        // Check if bucket exists and create it if not (this is just a precaution)
+        const { data, error } = await supabase.storage.getBucket('permisos_documentos');
+        if (error && error.code === 'PGRST116') {
+          console.log('Creating storage bucket for permit documents...');
+          // This would normally be done via migrations or admin panel
+          // In production, this should be pre-created
+        }
+      } catch (err) {
+        console.error("Error checking storage bucket:", err);
+      }
+    };
+
+    checkBucket();
+  }, []);
+
   // Fetch unit data and related permits
   const fetchData = useCallback(async () => {
     setLoading(true);

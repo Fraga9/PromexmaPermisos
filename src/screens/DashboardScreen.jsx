@@ -9,11 +9,16 @@ import PermitTimeline from '../components/dashboard/PermitTimeline';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import ErrorMessage from '../components/common/ErrorMessage';
 import styles from './DashboardScreen.module.css';
+import RecentUploadsCard from './components/RecentUploadsCard';
+import { Link } from 'react-router-dom';
+import { MdDashboard, MdFolder, MdInsertChart, MdPerson } from 'react-icons/md';
+import { useAuth } from '../context/AuthContext';
 
 function DashboardScreen() {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
     async function fetchDashboardData() {
@@ -22,7 +27,6 @@ function DashboardScreen() {
       try {
         // Llamada a función RPC en Supabase para obtener todos los datos del dashboard
         const { data, error: rpcError } = await supabase.rpc('get_dashboard_data');
-        
 
         if (rpcError) throw rpcError;
         setDashboardData(data || {});
@@ -38,7 +42,9 @@ function DashboardScreen() {
     fetchDashboardData();
   }, []);
 
-  if (loading) return <div className={styles.loadingContainer}><LoadingSpinner size="large" /></div>;
+  if (loading) {
+    return <div className={styles.loadingContainer}><LoadingSpinner size="large" /></div>;
+  }
 
   return (
     <div className={styles.screenContainer}>
@@ -74,6 +80,13 @@ function DashboardScreen() {
       <section className={styles.section}>
         <h2>Timeline de Permisos Críticos</h2>
         <PermitTimeline data={dashboardData?.permitTimeline} />
+      </section>
+
+      {/* Sección 6: Documentos recientes - solo visible para usuarios autenticados */}
+
+      <section className={styles.section}>
+        <h2>Documentos Recientes</h2>
+        <RecentUploadsCard />
       </section>
     </div>
   );

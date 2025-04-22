@@ -6,8 +6,8 @@
     /* Ajuste para evitar overflow */
     max-width: 80vw;
     min-width: 200px;
-    background-color: #ee341d;
-    color: #fff;
+    background-color: var(--color-primary);
+    color: var(--color-bg-card);
     padding: 1% 0;
     overflow-y: auto; /* Permite scroll dentro de la sidebar si el contenido es largo */
     z-index: 1250; /* Asegura que la sidebar esté por encima de otros elementos */
@@ -62,7 +62,7 @@
     /* Ajustado para evitar desbordes */
     padding: 0 10px;
     /* Reducido para mantener consistencia */
-    color: #fff;
+    color: var(--color-bg-card);
     letter-spacing: 1px;
 }
 
@@ -79,7 +79,7 @@
 .navLink {
     display: block;
     padding: 14px 28px 14px 24px;
-    color: #fff;
+    color: var(--color-bg-card);
     /* Texto grisáceo */
     text-decoration: none;
     transition: background-color 0.2s, color 0.2s, border-left 0.2s;
@@ -91,16 +91,16 @@
 }
 
 .navLink:hover {
-    background-color: #fff2ef;
+    background-color: var(--color-accent);
     /* Azul un poco más claro */
-    color: #ee341d;
+    color: var(--color-primary);
 }
 
 .active {
-    background-color: #fff2ef;
-    color: #ee341d;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
     /* Texto blanco */
     font-weight: 700;
-    border-left: 4px solid #5f636e;
+    border-left: 4px solid var(--color-secondary);
     /* Borde azul indicador */
 }

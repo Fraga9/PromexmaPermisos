@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { MdSave, MdEdit, MdCheckCircle, MdCancel, MdDelete } from 'react-icons/md';
+import { MdSave, MdEdit, MdCheckCircle, MdCancel, MdDelete, MdAttachFile } from 'react-icons/md';
 import { Tooltip } from 'react-tooltip';
 import styles from './PermitRow.module.css';
-import { useAuth } from '../../context/AuthContext'; // Importamos el contexto de autenticación
+import { useAuth } from '../../context/AuthContext';
+import UnitUploadFile from './UnitUploadFile';
 
 // Helper to format dates
 const formatDate = (dateString) => {
@@ -34,7 +35,8 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
   const [isEditingComment, setIsEditingComment] = useState(false);
   const [newComment, setNewComment] = useState(permit.comentarios || '');
   const [isUpdating, setIsUpdating] = useState(false);
-  const { isAuthenticated } = useAuth(); // Usamos el hook de autenticación
+  const [showDocuments, setShowDocuments] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   // Status to visual class mapping
   const statusClassMap = {
@@ -79,111 +81,138 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
     }
   };
 
+  const toggleDocuments = () => {
+    setShowDocuments(!showDocuments);
+  };
+
   return (
-    <tr className={styles.tableRow}>
-      <td data-label="Permiso" data-tooltip-id={`permit-name-${permit.id}`} data-tooltip-content={permit.permiso}>
-        {permit.permiso}
-        <Tooltip id={`permit-name-${permit.id}`} place="top" />
-      </td>
-      {isAuthenticated && (
-        <td data-label="Nueva Vigencia">
-          <div className={styles.dateInputContainer}>
-            <input
-              type="date"
-              value={newDate}
-              onChange={handleDateChange}
-              className={styles.dateInput}
-              disabled={isUpdating}
-              data-tooltip-id={`date-picker-${permit.id}`}
-              data-tooltip-content="Selecciona nueva fecha de vigencia"
-            />
-            <Tooltip id={`date-picker-${permit.id}`} place="top" />
-            <button
-              onClick={handleSaveDate}
-              disabled={isUpdating || newDate === permit.vigencia}
-              className={styles.iconButton}
-              data-tooltip-id={`save-date-${permit.id}`}
-              data-tooltip-content="Guardar nueva fecha"
-            >
-              <MdSave />
-            </button>
-            <Tooltip id={`save-date-${permit.id}`} place="top" />
-          </div>
+    <>
+      <tr className={styles.tableRow}>
+        <td data-label="Permiso" data-tooltip-id={`permit-name-${permit.id}`} data-tooltip-content={permit.permiso}>
+          {permit.permiso}
+          <Tooltip id={`permit-name-${permit.id}`} place="top" />
         </td>
-      )}
-      <td data-label="Vigencia Actual">{formatDate(permit.vigencia)}</td>
-      <td data-label="Estatus">
-        <span className={`${styles.statusBadge} ${statusClass}`}>
-          {statusVisual}
-        </span>
-      </td>
-      <td data-label="Ponderación">{permit.ponderacion ?? '-'}</td>
-      <td data-label="Puntaje">{permit.puntaje ?? '-'}</td>
-      <td data-label="Comentarios">
-        {isAuthenticated && isEditingComment ? (
-          <div className={styles.commentEditContainer}>
-            <textarea
-              value={newComment}
-              onChange={handleCommentChange}
-              className={styles.commentTextarea}
-              disabled={isUpdating}
-              rows={2}
-              placeholder="Escribe un comentario..."
-            />
-            <div className={styles.commentActions}>
-              <button
-                onClick={handleSaveComment}
+        {isAuthenticated && (
+          <td data-label="Nueva Vigencia">
+            <div className={styles.dateInputContainer}>
+              <input
+                type="date"
+                value={newDate}
+                onChange={handleDateChange}
+                className={styles.dateInput}
                 disabled={isUpdating}
-                className={`${styles.iconButton} ${styles.saveIcon}`}
-                data-tooltip-id={`save-comment-${permit.id}`}
-                data-tooltip-content="Guardar comentario"
-              >
-                <MdCheckCircle />
-              </button>
+                data-tooltip-id={`date-picker-${permit.id}`}
+                data-tooltip-content="Selecciona nueva fecha de vigencia"
+              />
+              <Tooltip id={`date-picker-${permit.id}`} place="top" />
               <button
-                onClick={handleCancelEditComment}
-                disabled={isUpdating}
-                className={`${styles.iconButton} ${styles.cancelIcon}`}
-                data-tooltip-id={`cancel-comment-${permit.id}`}
-                data-tooltip-content="Cancelar"
+                onClick={handleSaveDate}
+                disabled={isUpdating || newDate === permit.vigencia}
+                className={styles.iconButton}
+                data-tooltip-id={`save-date-${permit.id}`}
+                data-tooltip-content="Guardar nueva fecha"
               >
-                <MdCancel />
+                <MdSave />
               </button>
+              <Tooltip id={`save-date-${permit.id}`} place="top" />
             </div>
-            <Tooltip id={`save-comment-${permit.id}`} place="top" />
-            <Tooltip id={`cancel-comment-${permit.id}`} place="top" />
-          </div>
-        ) : (
-          <div className={styles.commentDisplay}>
-            <span className={styles.commentText}>{permit.comentarios || '-'}</span>
-            {isAuthenticated && (
-              <button
-                onClick={() => setIsEditingComment(true)}
-                className={styles.editCommentButton}
-                data-tooltip-id={`edit-comment-${permit.id}`}
-                data-tooltip-content="Editar comentario"
-              >
-                <MdEdit />
-              </button>
-            )}
-            {isAuthenticated && <Tooltip id={`edit-comment-${permit.id}`} place="top" />}
-          </div>
+          </td>
         )}
-      </td>
-      {isAuthenticated && (
-        <td data-label="Acciones">
-          <button
-            onClick={handleDeletePermit}
-            className={`${styles.iconButton} ${styles.deleteIcon}`}
-            data-tooltip-id={`delete-permit-${permit.id}`}
-            data-tooltip-content="Eliminar permiso"
-          >
-            <MdDelete />
-          </button>
-          <Tooltip id={`delete-permit-${permit.id}`} place="top" />
+        <td data-label="Vigencia Actual">{formatDate(permit.vigencia)}</td>
+        <td data-label="Estatus">
+          <span className={`${styles.statusBadge} ${statusClass}`}>
+            {statusVisual}
+          </span>
         </td>
+        <td data-label="Ponderación">{permit.ponderacion ?? '-'}</td>
+        <td data-label="Puntaje">{permit.puntaje ?? '-'}</td>
+        <td data-label="Comentarios">
+          {isAuthenticated && isEditingComment ? (
+            <div className={styles.commentEditContainer}>
+              <textarea
+                value={newComment}
+                onChange={handleCommentChange}
+                className={styles.commentTextarea}
+                disabled={isUpdating}
+                rows={2}
+                placeholder="Escribe un comentario..."
+              />
+              <div className={styles.commentActions}>
+                <button
+                  onClick={handleSaveComment}
+                  disabled={isUpdating}
+                  className={`${styles.iconButton} ${styles.saveIcon}`}
+                  data-tooltip-id={`save-comment-${permit.id}`}
+                  data-tooltip-content="Guardar comentario"
+                >
+                  <MdCheckCircle />
+                </button>
+                <button
+                  onClick={handleCancelEditComment}
+                  disabled={isUpdating}
+                  className={`${styles.iconButton} ${styles.cancelIcon}`}
+                  data-tooltip-id={`cancel-comment-${permit.id}`}
+                  data-tooltip-content="Cancelar"
+                >
+                  <MdCancel />
+                </button>
+              </div>
+              <Tooltip id={`save-comment-${permit.id}`} place="top" />
+              <Tooltip id={`cancel-comment-${permit.id}`} place="top" />
+            </div>
+          ) : (
+            <div className={styles.commentDisplay}>
+              <span className={styles.commentText}>{permit.comentarios || '-'}</span>
+              {isAuthenticated && (
+                <button
+                  onClick={() => setIsEditingComment(true)}
+                  className={styles.editCommentButton}
+                  data-tooltip-id={`edit-comment-${permit.id}`}
+                  data-tooltip-content="Editar comentario"
+                >
+                  <MdEdit />
+                </button>
+              )}
+              {isAuthenticated && <Tooltip id={`edit-comment-${permit.id}`} place="top" />}
+            </div>
+          )}
+        </td>
+        <td data-label="Acciones">
+          <div className={styles.actionButtons}>
+            <button
+              onClick={toggleDocuments}
+              className={`${styles.iconButton} ${styles.documentIcon}`}
+              data-tooltip-id={`toggle-documents-${permit.id}`}
+              data-tooltip-content={showDocuments ? "Ocultar documentos" : "Ver documentos"}
+            >
+              <MdAttachFile />
+            </button>
+            <Tooltip id={`toggle-documents-${permit.id}`} place="top" />
+            
+            {isAuthenticated && (
+              <>
+                <button
+                  onClick={handleDeletePermit}
+                  className={`${styles.iconButton} ${styles.deleteIcon}`}
+                  data-tooltip-id={`delete-permit-${permit.id}`}
+                  data-tooltip-content="Eliminar permiso"
+                >
+                  <MdDelete />
+                </button>
+                <Tooltip id={`delete-permit-${permit.id}`} place="top" />
+              </>
+            )}
+          </div>
+        </td>
+      </tr>
+      {showDocuments && (
+        <tr className={styles.documentsRow}>
+          <td colSpan={isAuthenticated ? "8" : "7"}>
+            <UnitUploadFile permitId={permit.id} />
+          </td>
+        </tr>
       )}
-    </tr>
+    </>
   );
 }
 

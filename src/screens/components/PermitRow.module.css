@@ -84,6 +84,23 @@
     background-color: transparent;
 }
 
+.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.iconButton:hover {
+    background-color: #e0e0e0;
+}
+
 /* Estilos para insignias de estado */
 .statusBadge {
     display: inline-block;
@@ -162,6 +179,14 @@
     background-color: rgba(25, 135, 84, 0.1);
 }
 
+.saveIcon {
+    color: #388e3c;
+}
+
+.saveIcon:hover {
+    background-color: #e8f5e9;
+}
+
 .cancelIcon {
     color: #dc3545;
 }
@@ -169,6 +194,14 @@
 .cancelIcon:hover {
     color: #bb2d3b;
     background-color: rgba(220, 53, 69, 0.1);
+}
+
+.cancelIcon {
+    color: #f44336;
+}
+
+.cancelIcon:hover {
+    background-color: #ffebee;
 }
 
 .commentDisplay {
@@ -218,6 +251,14 @@
 .deleteIcon:hover {
     color: #bb2d3b;
     background-color: rgba(220, 53, 69, 0.1);
+}
+
+.deleteIcon {
+    color: #e53935;
+}
+
+.deleteIcon:hover {
+    background-color: #ffebee;
 }
 
 /* Media Queries para diseño responsivo */
@@ -309,4 +350,30 @@
     .editCommentButton {
         margin-left: 0;
     }
+}
+
+/* Add this to your existing PermitRow.module.css file */
+
+.actionButtons {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.documentIcon {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.documentIcon:hover {
+  background-color: #bbdefb;
+}
+
+.documentsRow {
+  background-color: #f5f5f5;
+}
+
+.documentsRow > td {
+  padding: 0 !important;
+  border-top: none !important;
 }
