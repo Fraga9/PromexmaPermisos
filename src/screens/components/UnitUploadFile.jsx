@@ -12,12 +12,30 @@ function UnitUploadFile({ permitId }) {
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const { isAuthenticated } = useAuth();
   const [newUploads, setNewUploads] = useState([]);
+  const [permitData, setPermitData] = useState(null);
 
   useEffect(() => {
     if (permitId) {
       fetchFiles();
+      fetchPermitData();
     }
   }, [permitId]);
+
+  // Nuevo método para obtener los datos del permiso
+  const fetchPermitData = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('permisos')
+        .select('*')
+        .eq('id', permitId)
+        .single();
+
+      if (error) throw error;
+      setPermitData(data);
+    } catch (error) {
+      console.error('Error fetching permit data:', error);
+    }
+  };
 
   const fetchFiles = async () => {
     try {
@@ -45,6 +63,34 @@ function UnitUploadFile({ permitId }) {
     }
   };
 
+  // Función para generar el nombre del archivo según el formato requerido
+  const generateFileName = (originalFileName) => {
+    if (!permitData) return `${permitId}_${Date.now()}`;
+    
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // 01-12
+    const year = now.getFullYear();
+    
+    // Obtenemos la extensión del archivo original
+    const fileExt = originalFileName.split('.').pop();
+    
+    // Limpiamos los nombres para quitar espacios y caracteres especiales
+    const unidadOperativa = permitData.unidad_operativa
+      .replace(/\s+/g, '')
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, ""); // Quitar acentos
+    
+    const permisoNombre = permitData.permiso
+      .split('(')[0] // Tomar solo el nombre antes de los paréntesis
+      .trim()
+      .replace(/\s+/g, '')
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, ""); // Quitar acentos
+    
+    // Formato: {unidadOperativa}_{permiso}_{mes}_{año}.{extensión}
+    return `${unidadOperativa}_${permisoNombre}_${month}_${year}.${fileExt}`;
+  };
+
   const handleFileUpload = async (event) => {
     try {
       const file = event.target.files[0];
@@ -56,7 +102,7 @@ function UnitUploadFile({ permitId }) {
         return;
       }
 
-      // Verificar el tamaño del archivo (máximo 5MB)
+      // Verificar el tamaño del archivo (máximo 10MB)
       if (file.size > 10 * 1024 * 1024) {
         setUploadError('El archivo no puede ser mayor a 10MB.');
         return;
@@ -65,9 +111,8 @@ function UnitUploadFile({ permitId }) {
       setUploading(true);
       setUploadError(null);
 
-      // Crear un nombre único para el archivo
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${permitId}_${Date.now()}.${fileExt}`;
+      // Generar el nombre de archivo con el nuevo formato
+      const fileName = generateFileName(file.name);
       const filePath = `permit_documents/${fileName}`;
 
       // Subir archivo a Supabase Storage
@@ -83,7 +128,7 @@ function UnitUploadFile({ permitId }) {
         .insert([
           {
             permiso_id: permitId,
-            nombre_archivo: file.name,
+            nombre_archivo: file.name, // Guardamos el nombre original para mostrar al usuario
             ruta_archivo: filePath,
           }
         ]);
