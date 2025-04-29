@@ -36,7 +36,7 @@ function RecentUploadsCard() {
     try {
       setLoading(true);
       
-      // Obtener archivos subidos en las últimas 72 horas con información del permiso y unidad
+      // Obtener archivos subidos en los últimos 7 días con información del permiso y unidad
       const { data, error } = await supabase
         .from('documentos_permisos')
         .select(`
@@ -48,7 +48,7 @@ function RecentUploadsCard() {
             unidad_operativa_id
           )
         `)
-        .gte('fecha_subida', new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString())
+        .gte('fecha_subida', new Date(Date.now() - 168 * 60 * 60 * 1000).toISOString())
         .order('fecha_subida', { ascending: false });
         
       if (error) throw error;
@@ -97,7 +97,7 @@ function RecentUploadsCard() {
       ) : recentFiles.length === 0 ? (
         <div className={styles.emptyState}>
           <MdOutlineUpdateDisabled className={styles.emptyIcon} />
-          <p>No hay documentos subidos en las últimas 72 horas</p>
+          <p>No hay documentos subidos en los últimos 7 días</p>
         </div>
       ) : (
         <div className={styles.fileListContainer}>

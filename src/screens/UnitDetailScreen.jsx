@@ -160,7 +160,13 @@ function UnitDetailScreen() {
       }
     },
     update: async (permitId, updateData) => {
-      if (!isAuthenticated) {
+      // Permitir la actualización de comentarios sin autenticación
+      const isOnlyCommentUpdate = 
+        Object.keys(updateData).length === 1 && 
+        Object.keys(updateData).includes('comentarios');
+      
+      // Para cualquier otra actualización que no sea comentarios, verificar autenticación
+      if (!isOnlyCommentUpdate && !isAuthenticated) {
         showToast('No tienes permisos para realizar esta acción', 'error');
         return false;
       }

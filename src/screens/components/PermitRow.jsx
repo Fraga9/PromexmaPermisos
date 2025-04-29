@@ -127,7 +127,7 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
         <td data-label="Ponderación">{permit.ponderacion ?? '-'}</td>
         <td data-label="Puntaje">{permit.puntaje ?? '-'}</td>
         <td data-label="Comentarios">
-          {isAuthenticated && isEditingComment ? (
+          {isEditingComment ? (
             <div className={styles.commentEditContainer}>
               <textarea
                 value={newComment}
@@ -163,17 +163,15 @@ function PermitRow({ permit, onUpdatePermit, onDeletePermit }) {
           ) : (
             <div className={styles.commentDisplay}>
               <span className={styles.commentText}>{permit.comentarios || '-'}</span>
-              {isAuthenticated && (
-                <button
-                  onClick={() => setIsEditingComment(true)}
-                  className={styles.editCommentButton}
-                  data-tooltip-id={`edit-comment-${permit.id}`}
-                  data-tooltip-content="Editar comentario"
-                >
-                  <MdEdit />
-                </button>
-              )}
-              {isAuthenticated && <Tooltip id={`edit-comment-${permit.id}`} place="top" />}
+              <button
+                onClick={() => setIsEditingComment(true)}
+                className={styles.editCommentButton}
+                data-tooltip-id={`edit-comment-${permit.id}`}
+                data-tooltip-content="Editar comentario"
+              >
+                <MdEdit />
+              </button>
+              <Tooltip id={`edit-comment-${permit.id}`} place="top" />
             </div>
           )}
         </td>
